@@ -3,19 +3,22 @@
     Aqui vai aparecer a tabela
     <div class="table-wrapper">
       <div class="table-header">
-        <div class="header-cell">Nome</div>
-        <div class="header-cell">Idade</div>
-        <div class="header-cell">Sexo</div>
-        <div class="header-cell">Morada</div>
-        <div class="header-cell">Estado</div>
+        <div
+          v-for="name in header"
+          :key="name"
+          class="header-cell"
+        >
+          {{name}}
+        </div>
       </div>
       <div class="table-body">
-        <div class="table-row" v-for="user in users">
-          <div class="header-cell">{{user.Nome}}</div>
-          <div class="header-cell">{{user.Idade}}</div>
-          <div class="header-cell">{{user.Sexo}}</div>
-          <div class="header-cell">{{user.Morada}}</div>
-          <div class="header-cell">{{user.Estado}}</div>
+        <div
+          class="table-row"
+          v-for="(row, index) in rows"
+          :key="index"
+        >
+          <app-table-row :row="row">
+          </app-table-row>
         </div>
       </div>
     </div>
@@ -23,12 +26,21 @@
 </template>
 
 <script>
+import TableRow from './TableRow.vue'
 export default {
+  components: {'app-table-row': TableRow},
   props: {
     msg: String
   },
   data(){
     return {
+      header: [
+        "Nome",
+        "Idade",
+        "Sexo",
+        "Morada",
+        "Estado"
+      ],
       users: [
         {
           Nome: "Jose",
@@ -53,6 +65,18 @@ export default {
         }
       ]
     };
+  },
+  computed: {
+    rows() {
+      return this.users.map( (user, index) => {
+        let names = Object.getOwnPropertyNames(user)
+        return names.map(name => ({
+          value: user[name],
+          uid: `${name}-${index}`,
+          type:'text'
+        }))
+      })
+    }
   }
 }
 </script>
