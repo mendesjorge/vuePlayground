@@ -4,6 +4,7 @@
       class="header-cell"
       v-for="cell in row"
       :key="cell.uid"
+      :style="{'width': `${cell.width}%`}"
     >
       <component
         :is="`table-${cell.type}-cell`"
@@ -14,7 +15,7 @@
 </template>
 
 <script>
-import TableTextCell from './TableTextCell'
+import TableTextCell from './TableTextCell.vue'
 export default {
   components: {
     'table-text-cell': TableTextCell
@@ -31,11 +32,11 @@ export default {
 
 <style scoped lang="scss">
   .row{
+    width: 100%;
     display: flex;
     background-color: lightblue;
 
     .header-cell{
-      width: calc(100% / 5);
       padding:10px 15px;
     }
   }

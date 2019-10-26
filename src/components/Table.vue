@@ -4,11 +4,12 @@
     <div class="table-wrapper">
       <div class="table-header">
         <div
-          v-for="name in header"
-          :key="name"
+          v-for="config in configs"
+          :key="config.name"
           class="header-cell"
+          :style="{'width':`${config.width}%`}"
         >
-          {{name}}
+          {{config.display}}
         </div>
       </div>
       <div class="table-body">
@@ -34,13 +35,6 @@ export default {
   },
   data(){
     return {
-      header: [
-        "Nome",
-        "Idade",
-        "Sexo",
-        "Morada",
-        "Estado"
-      ],
       users: [
         {
           Nome: "Jose",
@@ -63,19 +57,43 @@ export default {
           Morada: "Na esquina",
           Estado: "Activo"
         }
+      ],
+      columns: [
+        {name: 'Nome', display: 'NAME', type: 'text', columnWeight: 3},
+        {name: 'Idade', display: 'IDADE', type: 'text'},
+        {name: 'Sexo', display: 'SEXO', type: 'text'},
+        {name: 'Morada', display: 'MORADA', type: 'text'},
+        {name: 'Estado', display: 'ESTADO', type: 'text'}
       ]
     };
   },
   computed: {
+    configs() {
+      // math to get table column width
+      let columnWidth = 100 / this.columns.reduce((prev, data) => prev + (data.columnWeight || 1), 0)
+
+      let ret =  this.columns.map(column => (
+        {
+          ...column,
+          width: columnWidth * (column.columnWeight || 1)
+        }
+      ))
+      console.log(ret)
+      return ret
+    },
     rows() {
-      return this.users.map( (user, index) => {
-        let names = Object.getOwnPropertyNames(user)
-        return names.map(name => ({
-          value: user[name],
-          uid: `${name}-${index}`,
-          type:'text'
-        }))
+      let rows = this.users.map( (user, index) => {
+
+        return this.columns.map(column => (
+          {
+            uid:          `${column.name}-${index}`,
+            value:        user[column.name],
+            type:         column.type,
+            width:        column.width
+          }
+        ))
       })
+      return rows
     }
   }
 }
@@ -90,7 +108,6 @@ export default {
     background-color: lightblue;
 
     .header-cell{
-      width: calc(100% / 5);
       padding:10px 15px;
     }
   }
@@ -101,7 +118,7 @@ export default {
       background-color:lightcoral;
 
       .header-cell{
-        width: calc(100% / 5);
+
         padding:10px 15px;
 
       }
