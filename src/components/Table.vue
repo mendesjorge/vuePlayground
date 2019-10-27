@@ -41,29 +41,29 @@ export default {
           Idade: 31,
           Sexo: "Masculino",
           Morada: "Na esquina",
-          Estado: "Activo"
+          Estado: true
         },
         {
           Nome: "Maria",
           Idade: 24,
           Sexo: "Feminino",
           Morada: "Na esquina",
-          Estado: "Activo"
+          Estado: true
         },
         {
           Nome: "Antonia",
           Idade: 60,
           Sexo: "Feminino",
           Morada: "Na esquina",
-          Estado: "Activo"
+          Estado: false
         }
       ],
       columns: [
-        {name: 'Nome', display: 'NAME', type: 'text', columnWeight: 3},
-        {name: 'Idade', display: 'IDADE', type: 'text'},
-        {name: 'Sexo', display: 'SEXO', type: 'text'},
-        {name: 'Morada', display: 'MORADA', type: 'text'},
-        {name: 'Estado', display: 'ESTADO', type: 'text'}
+        {attribute: 'Nome', display: 'NAME', type: 'text', columnWeight: 3},
+        {attribute: 'Idade', display: 'IDADE', type: 'text'},
+        {attribute: 'Sexo', display: 'SEXO', type: 'text'},
+        {attribute: 'Morada', display: 'MORADA', type: 'text',columnWeight: 6},
+        {attribute: 'Estado', display: 'ESTADO', type: 'switch', valueMap: value => value? 'Activo':'Inactivo'}
       ]
     };
   },
@@ -75,21 +75,22 @@ export default {
       let ret =  this.columns.map(column => (
         {
           ...column,
-          width: columnWidth * (column.columnWeight || 1)
+          width: (columnWidth * (column.columnWeight || 1)).toFixed(2)
         }
       ))
       console.log(ret)
       return ret
     },
     rows() {
-      let rows = this.users.map( (user, index) => {
+      let rows = this.users.map( (row, index) => {
 
-        return this.columns.map(column => (
+        return this.configs.map(config => (
           {
-            uid:          `${column.name}-${index}`,
-            value:        user[column.name],
-            type:         column.type,
-            width:        column.width
+            uid:          `${config.attribute}-${index}`,
+            value:        row[config.attribute],
+            display:      config.valueMap && config.valueMap(row[config.attribute]),
+            type:         config.type,
+            width:        config.width
           }
         ))
       })

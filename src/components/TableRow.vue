@@ -16,9 +16,12 @@
 
 <script>
 import TableTextCell from './TableTextCell.vue'
+import TableSwitchCell from './TableSwitchCell.vue'
 export default {
   components: {
-    'table-text-cell': TableTextCell
+    'table-text-cell': TableTextCell,
+    'table-switch-cell': TableSwitchCell,
+
   },
   props: {
     row: Array
