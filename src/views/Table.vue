@@ -13,39 +13,39 @@ import Table from '@/components/Table.vue'
 
 export default {
   components: {
-    "app-table": Table
+    'app-table': Table
   },
-  data(){
+  data () {
     return {
       users: [
         {
-          Nome: "Jose",
+          Nome: 'Jose',
           Idade: 31,
-          Sexo: "Masculino",
-          Morada: "Na esquina",
+          Sexo: 'Masculino',
+          Morada: 'Na esquina',
           Estado: true
         },
         {
-          Nome: "Maria",
+          Nome: 'Maria',
           Idade: 24,
-          Sexo: "Feminino",
-          Morada: "Na esquina",
+          Sexo: 'Feminino',
+          Morada: 'Na esquina',
           Estado: true
         },
         {
-          Nome: "Antonia",
+          Nome: 'Antonia',
           Idade: 60,
-          Sexo: "Feminino",
-          Morada: "Na esquina",
+          Sexo: 'Feminino',
+          Morada: 'Na esquina',
           Estado: false
         }
       ],
       configurations: [
-        {attribute: 'Nome', display: 'NAME', type: 'text', columnWeight: 3},
-        {attribute: 'Idade', display: 'IDADE', type: 'text'},
-        {attribute: 'Sexo', display: 'SEXO', type: 'text'},
-        {attribute: 'Morada', display: 'MORADA', type: 'text',columnWeight: 6},
-        {attribute: 'Estado', display: 'ESTADO', type: 'switch', valueMap: value => value? 'Activo':'Inactivo'}
+        { attribute: 'Nome', display: 'NAME', type: 'text', columnWeight: 3 },
+        { attribute: 'Idade', display: 'IDADE', type: 'text' },
+        { attribute: 'Sexo', display: 'SEXO', type: 'text' },
+        { attribute: 'Morada', display: 'MORADA', type: 'text', columnWeight: 6 },
+        { attribute: 'Estado', display: 'ESTADO', type: 'switch', valueMap: value => value ? 'Activo' : 'Inactivo' }
       ]
     }
   }

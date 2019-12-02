@@ -29,17 +29,17 @@
 <script>
 import TableRow from './TableRow.vue'
 export default {
-  components: {'app-table-row': TableRow},
+  components: { 'app-table-row': TableRow },
   props: {
     configurations: Array,
     data: Array
   },
-  data(){
+  data () {
     return {
     }
   },
   computed: {
-    columnsConfiguration() {
+    columnsConfiguration () {
       console.log(this)
       // math to get table column width
       let columnWidth = 100 / this.configurations.reduce((prev, data) => prev + (data.columnWeight || 1), 0)
@@ -51,15 +51,15 @@ export default {
         }
       ))
     },
-    rows() {
-      return this.data.map( (row, index) => {
+    rows () {
+      return this.data.map((row, index) => {
         return this.columnsConfiguration.map(column => (
           {
-            uid:          `${column.attribute}-${index}`,
-            value:        row[column.attribute],
-            display:      column.valueMap && column.valueMap(row[column.attribute]),
-            type:         column.type,
-            width:        column.width
+            uid: `${column.attribute}-${index}`,
+            value: row[column.attribute],
+            display: column.valueMap && column.valueMap(row[column.attribute]),
+            type: column.type,
+            width: column.width
           }
         ))
       })

@@ -20,13 +20,13 @@ import TableSwitchCell from './TableSwitchCell.vue'
 export default {
   components: {
     'table-text-cell': TableTextCell,
-    'table-switch-cell': TableSwitchCell,
+    'table-switch-cell': TableSwitchCell
 
   },
   props: {
     row: Array
   },
-  data(){
+  data () {
     return {
     }
   }
