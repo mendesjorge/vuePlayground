@@ -1,25 +1,17 @@
 <template>
-	<div class="">
-		<p>
-			moment in action
-		</p> 
-		{{date | moment('DD MMM YYYY')}}
-	</div>
+  <div class="home">
+    <div class="data">{{date | aut}}</div>
+  </div>
 </template>
+
 <script>
-	export default{
-		data(){
-			return {
-				date: new Date()
-			}
-		},
-		beforeCreate(){
-			this.$moment.locale('pt', {
-				monthsShort:['JAN', 'FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ']
-			})
-		}
-	}
+// @ is an alias to /src
+import HelloWorld from '@/components/HelloWorld.vue'
+
+export default {
+  name: 'home',
+  components: {
+    // HelloWorld
+  }
+}
 </script>
-<styles>
-	
-</styles>
