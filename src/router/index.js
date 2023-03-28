@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Table from '../views/Table.vue'
+import TestAutonumeric from '../views/TestAutonumeric.vue'
 
 Vue.use(VueRouter)
 
@@ -10,6 +11,11 @@ const routes = [
     path: '/',
     name: 'home',
     component: Home
+  },
+  {
+    path: '/autonumeric',
+    name: 'autonumeric',
+    component: TestAutonumeric
   },
   {
     path: '/table',
